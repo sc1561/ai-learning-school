@@ -2769,7 +2769,7 @@
                 "خزن عددًا لا اسم طالب.",
                 "استخدم print وتحقق من الناتج."
               ],
-              "task": "اكتب برنامجًا يخزن عدد لترات افتراضيًا، ويطبع جملة قصيرة مع العدد. جرب قيمة أخرى وقارن.",
+              "task": "أكمل TODO ليقرأ البرنامج عدد لترات افتراضيًا، ثم اطبعه. جرّب قيمتين مختلفتين؛ يجب أن يتغير المتغير مع المدخل.",
               "criteria": [
                 "الكود يعمل مع عددين مختلفين.",
                 "لا تستخدم أسماء أو استهلاكًا حقيقيًا لطالب.",
@@ -2808,10 +2808,38 @@
                 }
               ],
               "code": "liters = 12\nprint(liters)",
-              "solution": "liters = 15\nprint(\"استهلاك تدريبي:\", liters, \"لتر\")",
+              "solution": "liters = int(input(\"عدد لترات افتراضي: \"))\nprint(\"استهلاك تدريبي:\", liters)",
               "practice": {
-                "tests": "assert liters == 12",
-                "inputs": []
+                "starter": "liters = 0  # TODO: اقرأ العدد المدخل وحوّله إلى int\nprint(\"استهلاك تدريبي:\", liters)",
+                "inputs": [
+                  "12"
+                ],
+                "cases": [
+                  {
+                    "name": "قيمة أولى",
+                    "inputs": [
+                      "12"
+                    ],
+                    "check": "assert liters == 12",
+                    "hint": "راجع قراءة العدد وتحويل النص إلى int."
+                  },
+                  {
+                    "name": "قيمة مختلفة",
+                    "inputs": [
+                      "25"
+                    ],
+                    "check": "assert liters == 25",
+                    "hint": "تجنب تثبيت القيمة 12 في الكود؛ استخدم input."
+                  },
+                  {
+                    "name": "الصفر",
+                    "inputs": [
+                      "0"
+                    ],
+                    "check": "assert liters == 0",
+                    "hint": "الصفر عدد صحيح صالح في هذا التمرين."
+                  }
+                ]
               }
             },
             {
@@ -2824,7 +2852,7 @@
                 "حوّل النص إلى int قبل العملية الحسابية.",
                 "جرّب 12 ثم حرفًا وتعرف على سبب خطأ التحويل؛ ستعالجه في مرحلة لاحقة."
               ],
-              "task": "أنشئ برنامجًا يسأل عن عمر شخصية خيالية ويطبع عمرها في السنة القادمة. شغله في بيئة بايثون خارج الموقع.",
+              "task": "أكمل تحويل العمر إلى عدد، ثم احسب عمر شخصية خيالية في العام القادم. جرّب أكثر من عمر.",
               "criteria": [
                 "يستخدم int() قبل إضافة 1.",
                 "لا يجمع نصًا مع عدد.",
@@ -2874,9 +2902,35 @@
               "correct": 0,
               "explain": "تعيد input() قيمة نصية حتى إن كانت مكونة من أرقام.",
               "practice": {
-                "tests": "assert age_text == \"12\" and age == 12 and age + 1 == 13",
+                "starter": "age_text = input(\"عمر شخصية خيالية: \")\nage = 0  # TODO: حوّل النص إلى عدد\nnext_age = 0  # TODO: احسب العام القادم\nprint(\"العام القادم:\", next_age)",
                 "inputs": [
                   "12"
+                ],
+                "cases": [
+                  {
+                    "name": "عمر 12",
+                    "inputs": [
+                      "12"
+                    ],
+                    "check": "assert age == 12 and next_age == 13",
+                    "hint": "تذكر أن input يعيد نصًا؛ حوّله قبل إضافة واحد."
+                  },
+                  {
+                    "name": "عمر 7",
+                    "inputs": [
+                      "7"
+                    ],
+                    "check": "assert age == 7 and next_age == 8",
+                    "hint": "لا تثبت النتيجة على عمر المثال."
+                  },
+                  {
+                    "name": "عمر 0",
+                    "inputs": [
+                      "0"
+                    ],
+                    "check": "assert age == 0 and next_age == 1",
+                    "hint": "اختبر حد الصفر؛ النتيجة في العام القادم واحد."
+                  }
                 ]
               }
             },
@@ -2890,14 +2944,14 @@
                 "احسب النصيب والباقي باستخدام // و%.",
                 "اعرض جملة واضحة بمتغيرات داخل f-string وجرب 16 بطاقة."
               ],
-              "task": "اكتب برنامجًا لتوزيع عدد افتراضي من الأدوات على مجموعات، ثم قارن حالة فيها باقٍ بأخرى بلا باقٍ.",
+              "task": "أكمل حساب النصيب والباقي لمجموعات غير فارغة. جرّب توزيعًا فيه باقٍ وآخر بلا باقٍ.",
               "criteria": [
                 "المقسوم عليه أكبر من صفر.",
                 "النصيب والباقي صحيحان في الحالتين.",
                 "تظهر القيم داخل جملة مفهومة."
               ],
               "code": "cards = 14\ngroups = 4\nprint(f\"لكل مجموعة {cards // groups} وبقي {cards % groups}\")",
-              "solution": "for cards in [14, 16]:\n    groups = 4\n    print(f\"{cards}: لكل مجموعة {cards // groups}، والباقي {cards % groups}\")",
+              "solution": "cards = int(input(\"عدد البطاقات: \"))\ngroups = int(input(\"عدد المجموعات: \"))\nper_group = cards // groups\nremainder = cards % groups\nprint(f\"لكل مجموعة {per_group} والباقي {remainder}\")",
               "checks": [
                 {
                   "question": "ما ناتج 14 // 4؟",
@@ -2940,8 +2994,40 @@
               "correct": 0,
               "explain": "القسمة الصحيحة تتجاهل الجزء الكسري.",
               "practice": {
-                "tests": "assert cards == 14 and groups == 4 and cards // groups == 3 and cards % groups == 2",
-                "inputs": []
+                "starter": "cards = int(input(\"عدد البطاقات: \"))\ngroups = int(input(\"عدد المجموعات: \"))\nper_group = 0  # TODO: القسمة الصحيحة\nremainder = 0  # TODO: الباقي\nprint(f\"لكل مجموعة {per_group} والباقي {remainder}\")",
+                "inputs": [
+                  "14",
+                  "4"
+                ],
+                "cases": [
+                  {
+                    "name": "14 على 4",
+                    "inputs": [
+                      "14",
+                      "4"
+                    ],
+                    "check": "assert per_group == 3 and remainder == 2",
+                    "hint": "استخدم // للنصيب و% للباقي."
+                  },
+                  {
+                    "name": "16 على 4",
+                    "inputs": [
+                      "16",
+                      "4"
+                    ],
+                    "check": "assert per_group == 4 and remainder == 0",
+                    "hint": "راجع حالة التوزيع الكامل دون باقٍ."
+                  },
+                  {
+                    "name": "5 على 2",
+                    "inputs": [
+                      "5",
+                      "2"
+                    ],
+                    "check": "assert per_group == 2 and remainder == 1",
+                    "hint": "لا تثبت نتيجتي المثال الأول في الكود."
+                  }
+                ]
               }
             },
             {
@@ -2954,7 +3040,7 @@
                 "أضف فرعين بمسافات بادئة متساوية.",
                 "جرب 19 و20 و21 لتتحقق من الحد."
               ],
-              "task": "عدّل المثال ليعمل على ثلاث قيم اختبار واكتب نتيجة كل حالة.",
+              "task": "أكمل رسالتَي status للمقارنة مع الحد 20. اختبر 19 و20 و21 وانتبه للحد الفاصل.",
               "criteria": [
                 "19 و20 في الفرع الصحيح.",
                 "21 في فرع المراجعة.",
@@ -2993,10 +3079,38 @@
                 }
               ],
               "code": "liters = 21\nif liters > 20:\n    print(\"راجع الاستهلاك\")\nelse:\n    print(\"ضمن الحد\")",
-              "solution": "for liters in [19, 20, 21]:\n    if liters > 20:\n        print(liters, \"راجع الاستهلاك\")\n    else:\n        print(liters, \"ضمن الحد\")",
+              "solution": "liters = int(input(\"عدد لترات افتراضي: \"))\nif liters > 20:\n    status = \"راجع الاستهلاك\"\nelse:\n    status = \"ضمن الحد\"\nprint(status)",
               "practice": {
-                "tests": "assert liters == 21 and liters > 20",
-                "inputs": []
+                "starter": "liters = int(input(\"عدد لترات افتراضي: \"))\nstatus = \"\"\nif liters > 20:\n    status = \"\"  # TODO: رسالة مراجعة\nelse:\n    status = \"\"  # TODO: رسالة ضمن الحد\nprint(status)",
+                "inputs": [
+                  "19"
+                ],
+                "cases": [
+                  {
+                    "name": "أقل من الحد",
+                    "inputs": [
+                      "19"
+                    ],
+                    "check": "assert status == \"ضمن الحد\"",
+                    "hint": "19 ليست أكبر من 20."
+                  },
+                  {
+                    "name": "عند الحد",
+                    "inputs": [
+                      "20"
+                    ],
+                    "check": "assert status == \"ضمن الحد\"",
+                    "hint": "المقارنة > لا تشمل 20."
+                  },
+                  {
+                    "name": "تجاوز الحد",
+                    "inputs": [
+                      "21"
+                    ],
+                    "check": "assert status == \"راجع الاستهلاك\"",
+                    "hint": "عند تجاوز 20 يجب عرض رسالة المراجعة."
+                  }
+                ]
               }
             },
             {
@@ -3009,7 +3123,7 @@
                 "مرّ على القيم باستخدام for.",
                 "قسّم المجموع على عدد الأيام بعد انتهاء الحلقة."
               ],
-              "task": "اكتب برنامجًا لحساب مجموع [8, 10, 12] ثم المتوسط؛ جرّب قائمة ثانية.",
+              "task": "أكمل جمع القراءات وحساب المتوسط بعد انتهاء الحلقة. كل حالة اختبار تحوي قراءة واحدة على الأقل.",
               "criteria": [
                 "المجموع 30 والمتوسط 10 في المثال.",
                 "لا تقسّم داخل الحلقة.",
@@ -3048,10 +3162,38 @@
                 }
               ],
               "code": "days = [8, 10, 12]\ntotal = 0\nfor liters in days:\n    total += liters\nprint(total)",
-              "solution": "days = [8, 10, 12]\ntotal = sum(days)\nif days:\n    print(\"المجموع:\", total)\n    print(\"المتوسط:\", total / len(days))",
+              "solution": "days = [int(part) for part in input(\"قراءات مفصولة بفواصل: \").split(\",\")]\ntotal = 0\nfor liters in days:\n    total += liters\naverage = total / len(days)\nprint(\"المجموع:\", total, \"المتوسط:\", average)",
               "practice": {
-                "tests": "assert days == [8, 10, 12] and total == 30",
-                "inputs": []
+                "starter": "days = [int(part) for part in input(\"قراءات مفصولة بفواصل: \").split(\",\")]\ntotal = 0\nfor liters in days:\n    pass  # TODO: أضف القراءة إلى المجموع\naverage = 0  # TODO: احسب المتوسط بعد الحلقة\nprint(\"المجموع:\", total, \"المتوسط:\", average)",
+                "inputs": [
+                  "8,10,12"
+                ],
+                "cases": [
+                  {
+                    "name": "ثلاثة أيام",
+                    "inputs": [
+                      "8,10,12"
+                    ],
+                    "check": "assert days == [8,10,12] and total == 30 and average == 10",
+                    "hint": "اجمع كل قراءة ثم اقسم على عدد القراءات بعد الحلقة."
+                  },
+                  {
+                    "name": "يوم واحد",
+                    "inputs": [
+                      "7"
+                    ],
+                    "check": "assert total == 7 and average == 7",
+                    "hint": "الحل يجب أن يعمل مع قائمة طولها واحد."
+                  },
+                  {
+                    "name": "قيم مختلفة",
+                    "inputs": [
+                      "2,4,6,8"
+                    ],
+                    "check": "assert total == 20 and average == 5",
+                    "hint": "لا تستخدم مجموعًا ثابتًا من المثال."
+                  }
+                ]
               }
             },
             {
@@ -3103,10 +3245,30 @@
                 }
               ],
               "code": "def average(values):\n    if not values:\n        return None\n    return sum(values) / len(values)\n\nprint(average([8, 10, 12]))",
-              "solution": "assert average([8, 10, 12]) == 10\nassert average([]) is None\nassert average([4, 6]) == 5",
+              "solution": "def average(values):\n    if not values:\n        return None\n    return sum(values) / len(values)\n\nprint(average([8, 10, 12]))",
               "practice": {
-                "tests": "assert average([8, 10, 12]) == 10\nassert average([]) is None\nassert average([4, 6]) == 5",
-                "inputs": []
+                "starter": "def average(values):\n    # TODO: أعد None للقائمة الفارغة، ثم احسب المتوسط\n    return 0\n\nprint(average([8, 10, 12]))",
+                "inputs": [],
+                "cases": [
+                  {
+                    "name": "متوسط 3 قيم",
+                    "inputs": [],
+                    "check": "assert average([8, 10, 12]) == 10",
+                    "hint": "اجمع القيم ثم اقسم على طول القائمة."
+                  },
+                  {
+                    "name": "قائمة فارغة",
+                    "inputs": [],
+                    "check": "assert average([]) is None",
+                    "hint": "افحص القائمة قبل القسمة على طولها."
+                  },
+                  {
+                    "name": "قيم أخرى",
+                    "inputs": [],
+                    "check": "assert average([4, 6]) == 5",
+                    "hint": "الدالة تستقبل قيمًا مختلفة ولا تثبت نتيجة المثال."
+                  }
+                ]
               }
             }
           ]
@@ -3127,14 +3289,14 @@
                 "اطبع أول عنصر وآخر عنصر وعدد القيم.",
                 "جرّب قائمة فارغة وضع شرطًا قبل قراءة أول عنصر."
               ],
-              "task": "اجمع ثلاث درجات تدريبية في قائمة واطبع أعلاها بعد التحقق من عدم فراغها.",
+              "task": "أكمل حساب أعلى قيمة أو None للقائمة الفارغة. المدخلات أعداد افتراضية مفصولة بفواصل.",
               "criteria": [
                 "الفهرس الأول صفر.",
                 "تعالج الحالة الفارغة دون IndexError.",
                 "القيم افتراضية ولا تمثل درجات طلاب."
               ],
               "code": "scores = [7, 9, 8]\nif scores:\n    print(scores[0], scores[-1], len(scores))",
-              "solution": "scores = [7, 9, 8]\nif scores:\n    print(\"الأعلى:\", max(scores))\nelse:\n    print(\"لا توجد درجات\")",
+              "solution": "scores = [int(part) for part in input(\"قيم مفصولة بفواصل: \").split(\",\") if part.strip()]\nfirst = scores[0] if scores else None\nlast = scores[-1] if scores else None\nhighest = max(scores) if scores else None\nprint(first, last, highest)",
               "checks": [
                 {
                   "question": "ما قيمة [7, 9, 8][0]؟",
@@ -3177,8 +3339,36 @@
               "correct": 0,
               "explain": "يبدأ ترقيم عناصر القائمة من صفر.",
               "practice": {
-                "tests": "assert scores == [7, 9, 8] and scores[0] == 7 and scores[-1] == 8",
-                "inputs": []
+                "starter": "scores = [int(part) for part in input(\"قيم مفصولة بفواصل: \").split(\",\") if part.strip()]\nfirst = scores[0] if scores else None\nlast = scores[-1] if scores else None\nhighest = 0  # TODO: أعلى قيمة أو None إن فرغت القائمة\nprint(first, last, highest)",
+                "inputs": [
+                  "7,9,8"
+                ],
+                "cases": [
+                  {
+                    "name": "ثلاث قيم",
+                    "inputs": [
+                      "7,9,8"
+                    ],
+                    "check": "assert first == 7 and last == 8 and highest == 9",
+                    "hint": "أول فهرس صفر؛ استخدم max لأعلى قيمة."
+                  },
+                  {
+                    "name": "قائمة فارغة",
+                    "inputs": [
+                      ""
+                    ],
+                    "check": "assert first is None and last is None and highest is None",
+                    "hint": "افحص وجود قيم قبل قراءة الفهرس أو max."
+                  },
+                  {
+                    "name": "درجات سالبة تجريبية",
+                    "inputs": [
+                      "-3,-1,-5"
+                    ],
+                    "check": "assert highest == -1 and first == -3",
+                    "hint": "أعلى قيمة سالبة ليست صفرًا؛ تجنب تهيئة الأعلى بصفر."
+                  }
+                ]
               }
             },
             {
@@ -3191,14 +3381,14 @@
                 "مر على أسماء الفئات وأضف واحدًا لقيمة كل مفتاح.",
                 "جرب فئة جديدة ثم تحقق من المجموع الكلي."
               ],
-              "task": "احسب عدد مشاركات ثلاث فئات تدريبية في معرض مدرسي واختبر حالة فئة لم تظهر.",
+              "task": "أكمل عدّ تكرار فئات افتراضية. اختبر فئة مكررة وفئة جديدة وقائمة فارغة.",
               "criteria": [
                 "كل مفتاح فئة لا طالب.",
                 "المجموع في القاموس يساوي عدد العناصر المدخلة.",
                 "الفئة غير الموجودة تعيد صفرًا باستخدام get."
               ],
               "code": "topics = [\"علوم\", \"برمجة\", \"علوم\"]\ncounts = {}\nfor topic in topics:\n    counts[topic] = counts.get(topic, 0) + 1\nprint(counts)",
-              "solution": "topics = [\"علوم\", \"برمجة\", \"علوم\"]\ncounts = {}\nfor topic in topics:\n    counts[topic] = counts.get(topic, 0) + 1\nassert counts == {\"علوم\": 2, \"برمجة\": 1}\nprint(counts.get(\"روبوت\", 0))",
+              "solution": "topics = [part.strip() for part in input(\"فئات مفصولة بفواصل: \").split(\",\") if part.strip()]\ncounts = {}\nfor topic in topics:\n    counts[topic] = counts.get(topic, 0) + 1\nprint(counts)",
               "checks": [
                 {
                   "question": "ماذا تعيد {}.get(\"علوم\", 0)؟",
@@ -3241,8 +3431,36 @@
               "correct": 0,
               "explain": "get يستخدم القيمة الافتراضية إذا لم يوجد المفتاح.",
               "practice": {
-                "tests": "assert counts.get(\"علوم\", 0) == 2 and counts.get(\"برمجة\", 0) == 1\nassert counts.get(\"روبوت\", 0) == 0",
-                "inputs": []
+                "starter": "topics = [part.strip() for part in input(\"فئات مفصولة بفواصل: \").split(\",\") if part.strip()]\ncounts = {}\nfor topic in topics:\n    pass  # TODO: زد عداد هذه الفئة\nprint(counts)",
+                "inputs": [
+                  "علوم,برمجة,علوم"
+                ],
+                "cases": [
+                  {
+                    "name": "فئة مكررة",
+                    "inputs": [
+                      "علوم,برمجة,علوم"
+                    ],
+                    "check": "assert counts == {\"علوم\":2,\"برمجة\":1}",
+                    "hint": "زد قيمة المفتاح عند كل ظهور باستخدام get."
+                  },
+                  {
+                    "name": "فئة واحدة",
+                    "inputs": [
+                      "روبوت,روبوت,روبوت"
+                    ],
+                    "check": "assert counts == {\"روبوت\":3}",
+                    "hint": "لا تجعل اسم علوم ثابتًا داخل الكود."
+                  },
+                  {
+                    "name": "قائمة فارغة",
+                    "inputs": [
+                      ""
+                    ],
+                    "check": "assert counts == {}",
+                    "hint": "القائمة الفارغة يجب أن تبقي القاموس فارغًا."
+                  }
+                ]
               }
             },
             {
@@ -3255,14 +3473,14 @@
                 "ضع int داخل try وحدد except ValueError.",
                 "بعد التحويل ارفض الأعداد السالبة وجرب abc و-5 و8."
               ],
-              "task": "عدّل مثال النقاط ليقبل عددًا صحيحًا من 0 إلى 10، مع رسالة مفهومة لكل حالة غير صالحة.",
+              "task": "أكمل status بحيث تعيد «غير رقمي» عند فشل التحويل، و«خارج المجال» لقيمة خارج 0–10، و«مقبول» لعدد صالح.",
               "criteria": [
                 "يميز النص غير الرقمي من العدد خارج المجال.",
                 "لا يستعمل except عامة.",
                 "جُربت الحالات abc و-5 و8 و11."
               ],
               "code": "raw = \"8\"\ntry:\n    score = int(raw)\nexcept ValueError:\n    print(\"أدخل عددًا صحيحًا\")\nelse:\n    if 0 <= score <= 10:\n        print(\"مقبول:\", score)\n    else:\n        print(\"خارج المجال\")",
-              "solution": "for raw in [\"abc\", \"-5\", \"8\", \"11\"]:\n    try:\n        score = int(raw)\n    except ValueError:\n        print(raw, \"ليس عددًا صحيحًا\")\n    else:\n        print(raw, \"مقبول\" if 0 <= score <= 10 else \"خارج المجال\")",
+              "solution": "raw = input(\"النقاط 0 إلى 10: \")\ntry:\n    score = int(raw)\nexcept ValueError:\n    status = \"غير رقمي\"\nelse:\n    status = \"مقبول\" if 0 <= score <= 10 else \"خارج المجال\"\nprint(status)",
               "checks": [
                 {
                   "question": "أي خطأ يحدث غالبًا عند int(\"abc\")؟",
@@ -3305,8 +3523,44 @@
               "correct": 0,
               "explain": "لا يمثل abc عددًا صحيحًا قابلًا للتحويل.",
               "practice": {
-                "tests": "assert score == 8 and 0 <= score <= 10",
-                "inputs": []
+                "starter": "raw = input(\"النقاط 0 إلى 10: \")\nstatus = \"مقبول\"  # TODO: تحقق من التحويل ومن المجال\nprint(status)",
+                "inputs": [
+                  "8"
+                ],
+                "cases": [
+                  {
+                    "name": "عدد صالح",
+                    "inputs": [
+                      "8"
+                    ],
+                    "check": "assert status == \"مقبول\"",
+                    "hint": "العدد 8 صالح في المجال."
+                  },
+                  {
+                    "name": "نص غير رقمي",
+                    "inputs": [
+                      "abc"
+                    ],
+                    "check": "assert status == \"غير رقمي\"",
+                    "hint": "التقط ValueError عند int للنص غير الرقمي."
+                  },
+                  {
+                    "name": "أقل من الصفر",
+                    "inputs": [
+                      "-5"
+                    ],
+                    "check": "assert status == \"خارج المجال\"",
+                    "hint": "التحويل ناجح لكن القيمة خارج المجال."
+                  },
+                  {
+                    "name": "فوق العشرة",
+                    "inputs": [
+                      "11"
+                    ],
+                    "check": "assert status == \"خارج المجال\"",
+                    "hint": "ارفض القيم التي تتجاوز 10."
+                  }
+                ]
               }
             },
             {
@@ -3326,7 +3580,7 @@
                 "تحتفظ المدخلات الأصلية دون تعديل غير مطلوب."
               ],
               "code": "def valid_average(values):\n    valid = [x for x in values if x >= 0]\n    if not valid:\n        return None\n    return sum(valid) / len(valid)\nprint(valid_average([3, -1, 5]))",
-              "solution": "assert valid_average([3, -1, 5]) == 4\nassert valid_average([-2]) is None\nassert valid_average([]) is None",
+              "solution": "def valid_average(values):\n    valid = [x for x in values if x >= 0]\n    return sum(valid) / len(valid) if valid else None\n\nprint(valid_average([3, -1, 5]))",
               "checks": [
                 {
                   "question": "ما متوسط القيم غير السالبة في [3, -1, 5]؟",
@@ -3369,8 +3623,28 @@
               "correct": 0,
               "explain": "نحسب متوسط 3 و5 فقط.",
               "practice": {
-                "tests": "assert valid_average([3, -1, 5]) == 4\nassert valid_average([-2]) is None\nassert valid_average([]) is None",
-                "inputs": []
+                "starter": "def valid_average(values):\n    # TODO: صفِّ القيم السالبة ثم احسب المتوسط، أو أعد None\n    return 0\n\nprint(valid_average([3, -1, 5]))",
+                "inputs": [],
+                "cases": [
+                  {
+                    "name": "قراءة غير صالحة",
+                    "inputs": [],
+                    "check": "assert valid_average([3,-1,5]) == 4",
+                    "hint": "استبعد القيمة السالبة قبل حساب المتوسط."
+                  },
+                  {
+                    "name": "بلا بيانات صالحة",
+                    "inputs": [],
+                    "check": "assert valid_average([-2]) is None and valid_average([]) is None",
+                    "hint": "أعد None بدل القسمة على صفر."
+                  },
+                  {
+                    "name": "الصفر قيمة صالحة",
+                    "inputs": [],
+                    "check": "assert valid_average([0,4]) == 2",
+                    "hint": "القيمة صفر مقبولة ضمن غير السالب."
+                  }
+                ]
               }
             }
           ]
@@ -3398,7 +3672,7 @@
                 "يذكر أن أسوأ حالة تفحص كل العناصر."
               ],
               "code": "def find_index(items, target):\n    for index, item in enumerate(items):\n        if item == target:\n            return index\n    return None\nprint(find_index([4, 9, 2], 2))",
-              "solution": "assert find_index([4, 9, 2], 4) == 0\nassert find_index([4, 9, 2], 2) == 2\nassert find_index([4, 9, 2], 7) is None",
+              "solution": "def find_index(items, target):\n    for index, item in enumerate(items):\n        if item == target:\n            return index\n    return None\n\nprint(find_index([4, 9, 2], 2))",
               "checks": [
                 {
                   "question": "ما فهرس 2 في [4, 9, 2]؟",
@@ -3441,8 +3715,34 @@
               "correct": 0,
               "explain": "الفهرس يبدأ من صفر.",
               "practice": {
-                "tests": "assert find_index([4, 9, 2], 4) == 0\nassert find_index([4, 9, 2], 2) == 2\nassert find_index([4, 9, 2], 7) is None",
-                "inputs": []
+                "starter": "def find_index(items, target):\n    # TODO: مرّ على الفهارس والقيم؛ أعد الفهرس أو None\n    return None\n\nprint(find_index([4, 9, 2], 2))",
+                "inputs": [],
+                "cases": [
+                  {
+                    "name": "أول عنصر",
+                    "inputs": [],
+                    "check": "assert find_index([4,9,2],4) == 0",
+                    "hint": "الفهرس الأول صفر، وهو يختلف عن قيمة العنصر."
+                  },
+                  {
+                    "name": "آخر عنصر",
+                    "inputs": [],
+                    "check": "assert find_index([4,9,2],2) == 2",
+                    "hint": "واصل المرور حتى تصل إلى العنصر الأخير."
+                  },
+                  {
+                    "name": "عنصر غائب",
+                    "inputs": [],
+                    "check": "assert find_index([4,9,2],7) is None",
+                    "hint": "أعد None بعد انتهاء الحلقة دون إيجاد العنصر."
+                  },
+                  {
+                    "name": "قائمة فارغة",
+                    "inputs": [],
+                    "check": "assert find_index([],7) is None",
+                    "hint": "القائمة الفارغة لا تحتوي على هدف."
+                  }
+                ]
               }
             },
             {
@@ -3455,14 +3755,14 @@
                 "رتب وفق (-النقاط، رقم الفريق).",
                 "اختبر التعادل وتأكد أن القائمة الأصلية لم تتغير."
               ],
-              "task": "كوّن جدول ترتيب لثلاثة فرق افتراضية، وفسر نتيجة تعادل الفريقين الأعلى بالنقاط.",
+              "task": "أكمل دالة rank التي تعيد قائمة جديدة بترتيب النقاط تنازليًا ثم رقم الفريق تصاعديًا عند التعادل.",
               "criteria": [
                 "الترتيب الأساسي تنازلي في النقاط.",
                 "التعادل يُحسم صراحة برقم الفريق تصاعديًا.",
                 "لا يمثل الجدول ترتيب مسابقة حقيقية أو رسميًا."
               ],
               "code": "teams = [{\"team\": 12, \"points\": 8}, {\"team\": 3, \"points\": 8}, {\"team\": 7, \"points\": 5}]\nranking = sorted(teams, key=lambda row: (-row[\"points\"], row[\"team\"]))\nprint([row[\"team\"] for row in ranking])",
-              "solution": "assert [row[\"team\"] for row in ranking] == [3, 12, 7]\nassert teams[0][\"team\"] == 12  # القائمة الأصلية لم تتغير",
+              "solution": "def rank(teams):\n    return sorted(teams, key=lambda row: (-row[\"points\"], row[\"team\"]))\n\nprint([row[\"team\"] for row in rank([{\"team\":12,\"points\":8},{\"team\":3,\"points\":8},{\"team\":7,\"points\":5}])])",
               "checks": [
                 {
                   "question": "من يتقدم عند تعادل الفريقين 3 و12 بالنقاط، إذا كان الأصغر رقمًا أولًا؟",
@@ -3505,8 +3805,34 @@
               "correct": 0,
               "explain": "رقم الفريق 3 أصغر من 12.",
               "practice": {
-                "tests": "assert [row[\"team\"] for row in ranking] == [3, 12, 7]\nassert teams[0][\"team\"] == 12",
-                "inputs": []
+                "starter": "def rank(teams):\n    # TODO: رتب النقاط تنازليًا ثم رقم الفريق تصاعديًا\n    return teams\n\nprint([row[\"team\"] for row in rank([{\"team\":12,\"points\":8},{\"team\":3,\"points\":8},{\"team\":7,\"points\":5}])])",
+                "inputs": [],
+                "cases": [
+                  {
+                    "name": "تعادل فريقين",
+                    "inputs": [],
+                    "check": "assert [x[\"team\"] for x in rank([{\"team\":12,\"points\":8},{\"team\":3,\"points\":8},{\"team\":7,\"points\":5}])] == [3,12,7]",
+                    "hint": "عند التعادل يتقدم رقم الفريق الأصغر."
+                  },
+                  {
+                    "name": "نقاط مختلفة",
+                    "inputs": [],
+                    "check": "assert [x[\"team\"] for x in rank([{\"team\":1,\"points\":2},{\"team\":2,\"points\":9}])] == [2,1]",
+                    "hint": "الأعلى نقاطًا يأتي أولًا."
+                  },
+                  {
+                    "name": "لا تغيّر القائمة الأصلية",
+                    "inputs": [],
+                    "check": "items=[{\"team\":2,\"points\":1},{\"team\":1,\"points\":2}]\nresult=rank(items)\nassert [x[\"team\"] for x in items]==[2,1] and [x[\"team\"] for x in result]==[1,2]",
+                    "hint": "استعمل sorted لإنتاج ترتيب جديد مع إبقاء المدخلات كما هي."
+                  },
+                  {
+                    "name": "قائمة فارغة",
+                    "inputs": [],
+                    "check": "assert rank([]) == []",
+                    "hint": "القائمة الفارغة تعيد قائمة فارغة."
+                  }
+                ]
               }
             },
             {
@@ -3526,7 +3852,7 @@
                 "تشرح لماذا لا تكفي الاختبارات وحدها لإثبات صحة كل حالة."
               ],
               "code": "def total_positive(values):\n    return sum(x for x in values if x > 0)\nassert total_positive([2, -3, 4]) == 6\nassert total_positive([]) == 0",
-              "solution": "assert total_positive([0, 1]) == 1\nassert total_positive([2, -3, 4]) == 6\nassert total_positive([]) == 0\nassert total_positive([-5]) == 0",
+              "solution": "def total_positive(values):\n    return sum(x for x in values if x > 0)\n\nassert total_positive([2,-3,4]) == 6\nassert total_positive([]) == 0",
               "checks": [
                 {
                   "question": "ما نتيجة total_positive([2, -3, 4])؟",
@@ -3569,8 +3895,34 @@
               "correct": 0,
               "explain": "2 + 4 يساوي 6؛ السالب لا يدخل المجموع.",
               "practice": {
-                "tests": "assert total_positive([2, -3, 4]) == 6\nassert total_positive([0, 1]) == 1\nassert total_positive([]) == 0",
-                "inputs": []
+                "starter": "def total_positive(values):\n    # TODO: اجمع القيم الأكبر من صفر فقط\n    return 0\n\nassert total_positive([]) == 0",
+                "inputs": [],
+                "cases": [
+                  {
+                    "name": "قيم موجبة وسالبة",
+                    "inputs": [],
+                    "check": "assert total_positive([2,-3,4]) == 6",
+                    "hint": "استبعد القيم الأقل من صفر عند الجمع."
+                  },
+                  {
+                    "name": "القائمة الفارغة",
+                    "inputs": [],
+                    "check": "assert total_positive([]) == 0",
+                    "hint": "مجموع قائمة بلا قيم صفر."
+                  },
+                  {
+                    "name": "عند الصفر",
+                    "inputs": [],
+                    "check": "assert total_positive([0,1]) == 1",
+                    "hint": "الصفر ليس عددًا موجبًا لكنه لا يغير المجموع."
+                  },
+                  {
+                    "name": "قيم كلها سالبة",
+                    "inputs": [],
+                    "check": "assert total_positive([-5,-2]) == 0",
+                    "hint": "لا تجمع قيمًا سالبة."
+                  }
+                ]
               }
             },
             {
@@ -3583,14 +3935,14 @@
                 "رشح السجلات غير الصالحة واحسب المتوسط بعد التحقق من عدم فراغ القائمة.",
                 "رتب الفريق الأعلى نقاطًا ثم الأصغر رقمًا واختبر الفراغ والتعادل."
               ],
-              "task": "أنشئ مشروعًا من ثلاث دوال صغيرة لتحليل ثلاث فرق تدريبية، ثم اشرح لزميلك ما يحدث عند التعادل أو عدم وجود بيانات صالحة.",
+              "task": "أكمل analyze: استبعد النقاط خارج 0–10، أعد الفرق مرتبة بالنقاط ثم رقم الفريق، وأعد المتوسط أو None إذا لا توجد فرق صالحة.",
               "criteria": [
                 "لا تظهر أسماء أو درجات طلاب حقيقيين.",
                 "يوجد تعامل واضح مع البيانات غير الصالحة والقائمة الفارغة.",
                 "قاعدة التعادل قابلة للفحص والاختبارات تغطيها."
               ],
               "code": "teams = [{\"team\": 3, \"points\": 8}, {\"team\": 12, \"points\": 8}, {\"team\": 7, \"points\": -1}]\nvalid = [row for row in teams if 0 <= row[\"points\"] <= 10]\nranking = sorted(valid, key=lambda row: (-row[\"points\"], row[\"team\"]))\nmean = sum(row[\"points\"] for row in valid) / len(valid) if valid else None\nprint(ranking, mean)",
-              "solution": "def analyze(teams):\n    valid = [row for row in teams if 0 <= row[\"points\"] <= 10]\n    ranking = sorted(valid, key=lambda row: (-row[\"points\"], row[\"team\"]))\n    mean = sum(row[\"points\"] for row in valid) / len(valid) if valid else None\n    return ranking, mean\n\nrows, mean = analyze([{\"team\": 3, \"points\": 8}, {\"team\": 12, \"points\": 8}, {\"team\": 7, \"points\": -1}])\nassert [row[\"team\"] for row in rows] == [3, 12]\nassert mean == 8\nassert analyze([]) == ([], None)",
+              "solution": "def analyze(teams):\n    valid = [row for row in teams if 0 <= row[\"points\"] <= 10]\n    ranking = sorted(valid, key=lambda row: (-row[\"points\"], row[\"team\"]))\n    mean = sum(row[\"points\"] for row in valid) / len(valid) if valid else None\n    return ranking, mean\n\nprint(analyze([{\"team\":3,\"points\":8},{\"team\":12,\"points\":8},{\"team\":7,\"points\":-1}]))",
               "checks": [
                 {
                   "question": "أي سجل يُستبعد إذا كان المجال 0 إلى 10؟",
@@ -3633,8 +3985,34 @@
               "correct": 0,
               "explain": "القيمة -1 خارج المجال.",
               "practice": {
-                "tests": "assert [row[\"team\"] for row in ranking] == [3, 12]\nassert mean == 8\nassert [row[\"team\"] for row in sorted([{\"team\": 12, \"points\": 8}, {\"team\": 3, \"points\": 8}], key=lambda row: (-row[\"points\"], row[\"team\"]))] == [3, 12]",
-                "inputs": []
+                "starter": "def analyze(teams):\n    # TODO: اقبل النقاط بين 0 و10 ثم رتب الفرق واحسب متوسط الصالح\n    return [], None\n\nprint(analyze([{\"team\":3,\"points\":8},{\"team\":12,\"points\":8},{\"team\":7,\"points\":-1}]))",
+                "inputs": [],
+                "cases": [
+                  {
+                    "name": "قيمة غير صالحة وتعادل",
+                    "inputs": [],
+                    "check": "rows,mean=analyze([{\"team\":3,\"points\":8},{\"team\":12,\"points\":8},{\"team\":7,\"points\":-1}])\nassert [x[\"team\"] for x in rows]==[3,12] and mean==8",
+                    "hint": "استبعد -1 ورتب التعادل برقم الفريق."
+                  },
+                  {
+                    "name": "قائمة فارغة",
+                    "inputs": [],
+                    "check": "assert analyze([]) == ([],None)",
+                    "hint": "لا تقسّم على صفر عندما تخلو القائمة."
+                  },
+                  {
+                    "name": "جميع النقاط غير صالحة",
+                    "inputs": [],
+                    "check": "assert analyze([{\"team\":2,\"points\":11}]) == ([],None)",
+                    "hint": "بعد التصفية قد لا تبقى فرق صالحة."
+                  },
+                  {
+                    "name": "نقاط متفاوتة",
+                    "inputs": [],
+                    "check": "rows,mean=analyze([{\"team\":9,\"points\":4},{\"team\":1,\"points\":10}])\nassert [x[\"team\"] for x in rows]==[1,9] and mean==7",
+                    "hint": "رتب الأعلى نقاطًا أولًا، واحسب المتوسط من كل القيم الصالحة."
+                  }
+                ]
               }
             }
           ]
