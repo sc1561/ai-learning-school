@@ -6,7 +6,8 @@ export function makeProgressBackup(id, profile) {
   return JSON.stringify({ format: 'alzahrawi-progress', version: 1, exportedAt: new Date().toISOString(), id,
     profile: { name: profile.name, section: profile.section || '', xp: profile.xp || 0,
       completed: profile.completed || {}, attempts: profile.attempts || [],
-      pilot: profile.pilot || null, exam: profile.exam?.status === 'finished' ? profile.exam : null } }, null, 2);
+      pilot: profile.pilot || null, exam: profile.exam?.status === 'finished' ? profile.exam : null,
+      pythonDiagnostic: profile.pythonDiagnostic || null } }, null, 2);
 }
 
 export function readProgressBackup(text, expectedId, expectedProfile) {
@@ -25,10 +26,13 @@ export function readProgressBackup(text, expectedId, expectedProfile) {
       Object.keys(p.completed).length > 2000 || Object.entries(p.completed).some(([key, value]) => key.length > 100 || value !== true) ||
       !Array.isArray(p.attempts) || p.attempts.length > 500 || p.attempts.some(x => !plain(x)) ||
       (p.pilot !== null && p.pilot !== undefined && !plain(p.pilot)) ||
-      (p.exam !== null && p.exam !== undefined && !plain(p.exam))) {
+      (p.exam !== null && p.exam !== undefined && !plain(p.exam)) ||
+      (p.pythonDiagnostic !== null && p.pythonDiagnostic !== undefined &&
+        (!plain(p.pythonDiagnostic) || !plain(p.pythonDiagnostic.latest) || !Array.isArray(p.pythonDiagnostic.history) || p.pythonDiagnostic.history.length > 5))) {
     throw new Error('بيانات التقدم في الملف غير صالحة');
   }
   return { name: expectedProfile.name, section: expectedProfile.section || '', xp: p.xp,
     completed: Object.fromEntries(Object.entries(p.completed)), attempts: p.attempts,
-    pilot: p.pilot || undefined, exam: p.exam?.status === 'finished' ? p.exam : null };
+    pilot: p.pilot || undefined, exam: p.exam?.status === 'finished' ? p.exam : null,
+    pythonDiagnostic: p.pythonDiagnostic || undefined };
 }
