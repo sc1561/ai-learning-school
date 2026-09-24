@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PythonLab from './PythonLab.jsx';
 import { pythonChallenges, pythonChallengeLevels } from './pythonChallenges.js';
 
-export default function PythonChallenges({ profile, profileId, award, onClose }) {
-  const [selected, setSelected] = useState(null);
+export default function PythonChallenges({ profile, profileId, award, onClose, initialChallenge = null }) {
+  const [selected, setSelected] = useState(initialChallenge);
   const [hintCount, setHintCount] = useState(0);
   const [labPassed, setLabPassed] = useState(false);
   const challenge = pythonChallenges.find(item => item.id === selected);
