@@ -7,7 +7,8 @@ export function makeProgressBackup(id, profile) {
     profile: { name: profile.name, section: profile.section || '', xp: profile.xp || 0,
       completed: profile.completed || {}, attempts: profile.attempts || [],
       pilot: profile.pilot || null, exam: profile.exam?.status === 'finished' ? profile.exam : null,
-      pythonDiagnostic: profile.pythonDiagnostic || null } }, null, 2);
+      pythonDiagnostic: profile.pythonDiagnostic || null,
+      mixedSimulation: profile.mixedSimulation || null } }, null, 2);
 }
 
 export function readProgressBackup(text, expectedId, expectedProfile) {
@@ -28,11 +29,14 @@ export function readProgressBackup(text, expectedId, expectedProfile) {
       (p.pilot !== null && p.pilot !== undefined && !plain(p.pilot)) ||
       (p.exam !== null && p.exam !== undefined && !plain(p.exam)) ||
       (p.pythonDiagnostic !== null && p.pythonDiagnostic !== undefined &&
-        (!plain(p.pythonDiagnostic) || !plain(p.pythonDiagnostic.latest) || !Array.isArray(p.pythonDiagnostic.history) || p.pythonDiagnostic.history.length > 5))) {
+        (!plain(p.pythonDiagnostic) || !plain(p.pythonDiagnostic.latest) || !Array.isArray(p.pythonDiagnostic.history) || p.pythonDiagnostic.history.length > 5)) ||
+      (p.mixedSimulation !== null && p.mixedSimulation !== undefined &&
+        (!plain(p.mixedSimulation) || !Array.isArray(p.mixedSimulation.history || []) || p.mixedSimulation.history?.length > 8))) {
     throw new Error('بيانات التقدم في الملف غير صالحة');
   }
   return { name: expectedProfile.name, section: expectedProfile.section || '', xp: p.xp,
     completed: Object.fromEntries(Object.entries(p.completed)), attempts: p.attempts,
     pilot: p.pilot || undefined, exam: p.exam?.status === 'finished' ? p.exam : null,
-    pythonDiagnostic: p.pythonDiagnostic || undefined };
+    pythonDiagnostic: p.pythonDiagnostic || undefined,
+    mixedSimulation: p.mixedSimulation || undefined };
 }

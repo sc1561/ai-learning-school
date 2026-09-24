@@ -15,8 +15,8 @@ export function allAreas(packs=[]){return catalog.map(area=>({...area,tracks:[..
 export function academyTotal(packs=[]){return pythonChallenges.length+allAreas(packs).flatMap(a=>a.tracks).reduce((n,t)=>n+t.lessons.length+(t.challenges?.length||0),0)}
 const lessonChecks=lesson=>lesson.checks?.length?lesson.checks:[{question:lesson.question,choices:lesson.choices,correct:lesson.correct,explain:lesson.explain}];
 
-export default function Academy({profile,profileId,packs=[],award,savePythonDiagnostic,initialArea='all',initialTrack=null,onAiPath}){
-  const [areaId,setAreaId]=useState(initialArea),[trackId,setTrackId]=useState(initialTrack),[lessonId,setLessonId]=useState(null),[answer,setAnswer]=useState(null),[checkIndex,setCheckIndex]=useState(0),[passed,setPassed]=useState(false),[draft,setDraft]=useState(''),[showSolution,setShowSolution]=useState(false),[terminalDone,setTerminalDone]=useState(false),[workshopDone,setWorkshopDone]=useState(false),[pythonDone,setPythonDone]=useState(false);
+export default function Academy({profile,profileId,packs=[],award,savePythonDiagnostic,initialArea='all',initialTrack=null,initialLesson=null,onAiPath}){
+  const [areaId,setAreaId]=useState(initialArea),[trackId,setTrackId]=useState(initialTrack),[lessonId,setLessonId]=useState(initialLesson),[answer,setAnswer]=useState(null),[checkIndex,setCheckIndex]=useState(0),[passed,setPassed]=useState(false),[draft,setDraft]=useState(''),[showSolution,setShowSolution]=useState(false),[terminalDone,setTerminalDone]=useState(false),[workshopDone,setWorkshopDone]=useState(false),[pythonDone,setPythonDone]=useState(false);
   const [diagnosticOpen,setDiagnosticOpen]=useState(false);
   const [challengeMode,setChallengeMode]=useState(false);
   const areas=allAreas(packs),area=areas.find(a=>a.id===areaId),track=area?.tracks.find(t=>t.id===trackId),lesson=track?.lessons.find(l=>l.id===lessonId),challenge=track?.challenges?.find(c=>c.id===lessonId),done=profile?.completed||{};
