@@ -2808,7 +2808,11 @@
                 }
               ],
               "code": "liters = 12\nprint(liters)",
-              "solution": "liters = 15\nprint(\"استهلاك تدريبي:\", liters, \"لتر\")"
+              "solution": "liters = 15\nprint(\"استهلاك تدريبي:\", liters, \"لتر\")",
+              "practice": {
+                "tests": "assert liters == 12",
+                "inputs": []
+              }
             },
             {
               "id": "py-input-conversion",
@@ -2868,7 +2872,13 @@
                 "قائمة list"
               ],
               "correct": 0,
-              "explain": "تعيد input() قيمة نصية حتى إن كانت مكونة من أرقام."
+              "explain": "تعيد input() قيمة نصية حتى إن كانت مكونة من أرقام.",
+              "practice": {
+                "tests": "assert age_text == \"12\" and age == 12 and age + 1 == 13",
+                "inputs": [
+                  "12"
+                ]
+              }
             },
             {
               "id": "py-strings-math",
@@ -2928,7 +2938,11 @@
                 "2"
               ],
               "correct": 0,
-              "explain": "القسمة الصحيحة تتجاهل الجزء الكسري."
+              "explain": "القسمة الصحيحة تتجاهل الجزء الكسري.",
+              "practice": {
+                "tests": "assert cards == 14 and groups == 4 and cards // groups == 3 and cards % groups == 2",
+                "inputs": []
+              }
             },
             {
               "id": "py-conditions",
@@ -2979,7 +2993,11 @@
                 }
               ],
               "code": "liters = 21\nif liters > 20:\n    print(\"راجع الاستهلاك\")\nelse:\n    print(\"ضمن الحد\")",
-              "solution": "for liters in [19, 20, 21]:\n    if liters > 20:\n        print(liters, \"راجع الاستهلاك\")\n    else:\n        print(liters, \"ضمن الحد\")"
+              "solution": "for liters in [19, 20, 21]:\n    if liters > 20:\n        print(liters, \"راجع الاستهلاك\")\n    else:\n        print(liters, \"ضمن الحد\")",
+              "practice": {
+                "tests": "assert liters == 21 and liters > 20",
+                "inputs": []
+              }
             },
             {
               "id": "py-loops",
@@ -3030,7 +3048,11 @@
                 }
               ],
               "code": "days = [8, 10, 12]\ntotal = 0\nfor liters in days:\n    total += liters\nprint(total)",
-              "solution": "days = [8, 10, 12]\ntotal = sum(days)\nif days:\n    print(\"المجموع:\", total)\n    print(\"المتوسط:\", total / len(days))"
+              "solution": "days = [8, 10, 12]\ntotal = sum(days)\nif days:\n    print(\"المجموع:\", total)\n    print(\"المتوسط:\", total / len(days))",
+              "practice": {
+                "tests": "assert days == [8, 10, 12] and total == 30",
+                "inputs": []
+              }
             },
             {
               "id": "py-functions",
@@ -3081,7 +3103,11 @@
                 }
               ],
               "code": "def average(values):\n    if not values:\n        return None\n    return sum(values) / len(values)\n\nprint(average([8, 10, 12]))",
-              "solution": "assert average([8, 10, 12]) == 10\nassert average([]) is None\nassert average([4, 6]) == 5"
+              "solution": "assert average([8, 10, 12]) == 10\nassert average([]) is None\nassert average([4, 6]) == 5",
+              "practice": {
+                "tests": "assert average([8, 10, 12]) == 10\nassert average([]) is None\nassert average([4, 6]) == 5",
+                "inputs": []
+              }
             }
           ]
         },
@@ -3149,7 +3175,11 @@
                 "8"
               ],
               "correct": 0,
-              "explain": "يبدأ ترقيم عناصر القائمة من صفر."
+              "explain": "يبدأ ترقيم عناصر القائمة من صفر.",
+              "practice": {
+                "tests": "assert scores == [7, 9, 8] and scores[0] == 7 and scores[-1] == 8",
+                "inputs": []
+              }
             },
             {
               "id": "py-dict-count",
@@ -3209,7 +3239,11 @@
                 "واحد"
               ],
               "correct": 0,
-              "explain": "get يستخدم القيمة الافتراضية إذا لم يوجد المفتاح."
+              "explain": "get يستخدم القيمة الافتراضية إذا لم يوجد المفتاح.",
+              "practice": {
+                "tests": "assert counts.get(\"علوم\", 0) == 2 and counts.get(\"برمجة\", 0) == 1\nassert counts.get(\"روبوت\", 0) == 0",
+                "inputs": []
+              }
             },
             {
               "id": "py-validation",
@@ -3269,7 +3303,11 @@
                 "لا يحدث خطأ"
               ],
               "correct": 0,
-              "explain": "لا يمثل abc عددًا صحيحًا قابلًا للتحويل."
+              "explain": "لا يمثل abc عددًا صحيحًا قابلًا للتحويل.",
+              "practice": {
+                "tests": "assert score == 8 and 0 <= score <= 10",
+                "inputs": []
+              }
             },
             {
               "id": "py-filter-average",
@@ -3329,7 +3367,11 @@
                 "8"
               ],
               "correct": 0,
-              "explain": "نحسب متوسط 3 و5 فقط."
+              "explain": "نحسب متوسط 3 و5 فقط.",
+              "practice": {
+                "tests": "assert valid_average([3, -1, 5]) == 4\nassert valid_average([-2]) is None\nassert valid_average([]) is None",
+                "inputs": []
+              }
             }
           ]
         },
@@ -3397,7 +3439,11 @@
                 "9"
               ],
               "correct": 0,
-              "explain": "الفهرس يبدأ من صفر."
+              "explain": "الفهرس يبدأ من صفر.",
+              "practice": {
+                "tests": "assert find_index([4, 9, 2], 4) == 0\nassert find_index([4, 9, 2], 2) == 2\nassert find_index([4, 9, 2], 7) is None",
+                "inputs": []
+              }
             },
             {
               "id": "py-ranking",
@@ -3457,7 +3503,11 @@
                 "لا يمكن الحسم"
               ],
               "correct": 0,
-              "explain": "رقم الفريق 3 أصغر من 12."
+              "explain": "رقم الفريق 3 أصغر من 12.",
+              "practice": {
+                "tests": "assert [row[\"team\"] for row in ranking] == [3, 12, 7]\nassert teams[0][\"team\"] == 12",
+                "inputs": []
+              }
             },
             {
               "id": "py-tests",
@@ -3517,7 +3567,11 @@
                 "-3"
               ],
               "correct": 0,
-              "explain": "2 + 4 يساوي 6؛ السالب لا يدخل المجموع."
+              "explain": "2 + 4 يساوي 6؛ السالب لا يدخل المجموع.",
+              "practice": {
+                "tests": "assert total_positive([2, -3, 4]) == 6\nassert total_positive([0, 1]) == 1\nassert total_positive([]) == 0",
+                "inputs": []
+              }
             },
             {
               "id": "py-capstone",
@@ -3577,7 +3631,11 @@
                 "نقاط 10"
               ],
               "correct": 0,
-              "explain": "القيمة -1 خارج المجال."
+              "explain": "القيمة -1 خارج المجال.",
+              "practice": {
+                "tests": "assert [row[\"team\"] for row in ranking] == [3, 12]\nassert mean == 8\nassert [row[\"team\"] for row in sorted([{\"team\": 12, \"points\": 8}, {\"team\": 3, \"points\": 8}], key=lambda row: (-row[\"points\"], row[\"team\"]))] == [3, 12]",
+                "inputs": []
+              }
             }
           ]
         }

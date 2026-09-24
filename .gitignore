@@ -4,4 +4,5 @@ __pycache__/
 *.db
 node_modules/
 dist/
+frontend/public/pyodide/
 .pytest_cache/
