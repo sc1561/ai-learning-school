@@ -8,8 +8,8 @@ export function allAreas(packs=[]){return catalog.map(area=>({...area,tracks:[..
 export function academyTotal(packs=[]){return allAreas(packs).flatMap(a=>a.tracks).reduce((n,t)=>n+t.lessons.length+(t.challenges?.length||0),0)}
 const lessonChecks=lesson=>lesson.checks?.length?lesson.checks:[{question:lesson.question,choices:lesson.choices,correct:lesson.correct,explain:lesson.explain}];
 
-export default function Academy({profile,packs=[],award,initialArea='all',onAiPath}){
-  const [areaId,setAreaId]=useState(initialArea),[trackId,setTrackId]=useState(null),[lessonId,setLessonId]=useState(null),[answer,setAnswer]=useState(null),[checkIndex,setCheckIndex]=useState(0),[passed,setPassed]=useState(false),[flag,setFlag]=useState(''),[hint,setHint]=useState(false),[feedback,setFeedback]=useState('');
+export default function Academy({profile,packs=[],award,initialArea='all',initialTrack=null,onAiPath}){
+  const [areaId,setAreaId]=useState(initialArea),[trackId,setTrackId]=useState(initialTrack),[lessonId,setLessonId]=useState(null),[answer,setAnswer]=useState(null),[checkIndex,setCheckIndex]=useState(0),[passed,setPassed]=useState(false),[flag,setFlag]=useState(''),[hint,setHint]=useState(false),[feedback,setFeedback]=useState('');
   const areas=allAreas(packs),area=areas.find(a=>a.id===areaId),track=area?.tracks.find(t=>t.id===trackId),lesson=track?.lessons.find(l=>l.id===lessonId),challenge=track?.challenges?.find(c=>c.id===lessonId),done=profile?.completed||{};
   function chooseArea(id){setAreaId(id);setTrackId(null);setLessonId(null);setFeedback('')}
   function chooseTrack(id){setTrackId(id);setLessonId(null);setFeedback('')}
