@@ -8,7 +8,8 @@ export function makeProgressBackup(id, profile) {
       completed: profile.completed || {}, attempts: profile.attempts || [],
       pilot: profile.pilot || null, exam: profile.exam?.status === 'finished' ? profile.exam : null,
       pythonDiagnostic: profile.pythonDiagnostic || null,
-      mixedSimulation: profile.mixedSimulation || null } }, null, 2);
+      mixedSimulation: profile.mixedSimulation || null,
+      capstones: profile.capstones || {} } }, null, 2);
 }
 
 export function readProgressBackup(text, expectedId, expectedProfile) {
@@ -31,12 +32,16 @@ export function readProgressBackup(text, expectedId, expectedProfile) {
       (p.pythonDiagnostic !== null && p.pythonDiagnostic !== undefined &&
         (!plain(p.pythonDiagnostic) || !plain(p.pythonDiagnostic.latest) || !Array.isArray(p.pythonDiagnostic.history) || p.pythonDiagnostic.history.length > 5)) ||
       (p.mixedSimulation !== null && p.mixedSimulation !== undefined &&
-        (!plain(p.mixedSimulation) || !Array.isArray(p.mixedSimulation.history || []) || p.mixedSimulation.history?.length > 8))) {
+        (!plain(p.mixedSimulation) || !Array.isArray(p.mixedSimulation.history || []) || p.mixedSimulation.history?.length > 8)) ||
+      (p.capstones !== undefined && (!plain(p.capstones) || Object.keys(p.capstones).length > 80 || Object.entries(p.capstones).some(([id, item]) =>
+        !/^[a-z0-9-]{3,48}$/.test(id) || !plain(item) ||
+        ['goal','artifact','tests','reflection'].some(key => item[key] !== undefined && (typeof item[key] !== 'string' || item[key].length > 4000)) ||
+        (item.submittedAt !== undefined && item.submittedAt !== null && (typeof item.submittedAt !== 'string' || item.submittedAt.length > 40)))))) {
     throw new Error('بيانات التقدم في الملف غير صالحة');
   }
   return { name: expectedProfile.name, section: expectedProfile.section || '', xp: p.xp,
     completed: Object.fromEntries(Object.entries(p.completed)), attempts: p.attempts,
     pilot: p.pilot || undefined, exam: p.exam?.status === 'finished' ? p.exam : null,
     pythonDiagnostic: p.pythonDiagnostic || undefined,
-    mixedSimulation: p.mixedSimulation || undefined };
+    mixedSimulation: p.mixedSimulation || undefined, capstones: p.capstones || {} };
 }
