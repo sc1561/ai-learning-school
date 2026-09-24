@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-export default function PythonLab({ lesson, profileId, onDone }) {
+export default function PythonLab({ lesson, profileId, onDone, exampleEnabled = true, inputsEnabled = true }) {
   const draftKey = `alzahrawi-python-draft-v1:${encodeURIComponent(profileId || 'guest')}:${lesson.id}`;
   function savedDraft() {
     try {
@@ -69,11 +69,11 @@ export default function PythonLab({ lesson, profileId, onDone }) {
     <div className="python-lab-head"><strong>⌘ مختبر بايثون</strong><small>التشغيل داخل متصفحك · {total} حالات فحص</small></div>
     <p>أكمل الأجزاء المكتوب عندها TODO ثم شغّل البرنامج. تُحفظ المسودة على هذا المتصفح؛ اجتياز كل الحالات مطلوب لحفظ إنجاز الدرس. شغّل كودًا كتبته أو راجعته فقط.</p>
     <label>الكود<textarea dir="ltr" spellCheck="false" value={code} onChange={e => edit(e.target.value)} aria-label="كود بايثون" /></label>
-    <label>مدخلات لتجربتك الخاصة، قيمة في كل سطر<input dir="ltr" value={inputs} onChange={e => editInputs(e.target.value)} placeholder="مثال: 12" /></label>
+    {inputsEnabled && <label>مدخلات لتجربتك الخاصة، قيمة في كل سطر<input dir="ltr" value={inputs} onChange={e => editInputs(e.target.value)} placeholder="مثال: 12" /></label>}
     <div className="python-lab-actions"><button type="button" onClick={execute} disabled={state === 'loading' || state === 'running'}>{state === 'loading' ? 'تحميل بايثون…' : state === 'running' ? 'يجري التشغيل…' : '▶ تشغيل وفحص'}</button>{(state === 'loading' || state === 'running') && <button type="button" onClick={() => { runRef.current++; stop(); resetResult(); setOutput('أوقفت التشغيل.'); }}>إيقاف</button>}</div>
     <div role="status" className={'python-lab-result ' + state}><strong>{state === 'passed' ? `اجتزت ${passed} من ${total} حالات ✓` : state === 'failed' ? `اجتزت ${passed} من ${total} حالات · راجع التلميحات` : state === 'error' ? 'تعذر التشغيل' : state === 'loading' ? 'يُحمّل المفسّر للمرة الأولى…' : state === 'running' ? 'ينفذ البرنامج…' : 'مخرجات التجربة ونتائج الحالات ستظهر هنا'}</strong><pre dir="auto">{output}</pre></div>
     {cases.length > 0 && <div className="python-cases" aria-label="نتائج فحص الكود">{cases.map((item, index) => <div key={index} className={item.passed ? 'passed' : 'failed'}><strong>{item.passed ? '✓' : '↻'} {item.name}</strong>{!item.passed && <p>{item.hint}{item.error && !item.error.includes('AssertionError') ? ` · ${item.error.slice(0, 180)}` : ''}</p>}</div>)}</div>}
-    {attempted && <details className="python-example"><summary>راجع مثال الدرس بعد المحاولة</summary><pre dir="ltr"><code>{lesson.code}</code></pre></details>}
+    {exampleEnabled && attempted && <details className="python-example"><summary>راجع مثال الدرس بعد المحاولة</summary><pre dir="ltr"><code>{lesson.code}</code></pre></details>}
     <small>هذه حالات تدريبية منشورة وليست تصحيحًا شاملًا أو تحكيمًا رسميًا. يحتاج تنزيل المفسّر مرة واحدة عند فتح المختبر.</small>
   </section>;
 }

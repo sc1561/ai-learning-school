@@ -1,0 +1,17 @@
+import React, { useState } from 'react';
+import PythonLab from './PythonLab.jsx';
+import { pythonChallenges, pythonChallengeLevels } from './pythonChallenges.js';
+
+export default function PythonChallenges({ profile, profileId, award, onClose }) {
+  const [selected, setSelected] = useState(null);
+  const [hintCount, setHintCount] = useState(0);
+  const [labPassed, setLabPassed] = useState(false);
+  const challenge = pythonChallenges.find(item => item.id === selected);
+  const level = pythonChallengeLevels.find(item => item.id === challenge?.level);
+  const completed = profile?.completed || {};
+  function open(id) { setSelected(id); setHintCount(0); setLabPassed(false); }
+  return <section className="python-challenges">
+    <button className="academy-back" onClick={challenge ? () => open(null) : onClose}>→ {challenge ? 'جميع تحديات بايثون' : 'العودة إلى مسارات بايثون'}</button>
+    {!challenge ? <><header className="python-challenge-heading"><span className="eyebrow">PYTHON CHALLENGE LAB / مختبر المنافسة</span><h2>من الفكرة إلى حل قابل للاختبار</h2><p>٩ تحديات تدريبية في ثلاثة مستويات. جرّب الحل بنفسك، وراجع الحالات والتلميحات؛ تُحفظ النقاط مرة واحدة لكل تحدٍّ على هذا الجهاز.</p></header><div className="python-challenge-levels">{pythonChallengeLevels.map(tier => { const items = pythonChallenges.filter(item => item.level === tier.id); const count = items.filter(item => completed[`python-challenge:${item.id}`]).length; return <section className="python-challenge-level" key={tier.id}><header><span>{tier.title}</span><small>{tier.subtitle} · {count}/{items.length} مكتمل</small></header><div className="python-challenge-cards">{items.map(item => <button className="glass" key={item.id} onClick={() => open(item.id)}><span>{completed[`python-challenge:${item.id}`] ? 'مكتمل ✓' : `${tier.points} XP`}</span><h3>{item.title}</h3><p>{item.description}</p><strong>افتح التحدي ←</strong></button>)}</div></section>; })}</div></> : <><div className="python-challenge-detail glass"><span className="eyebrow">{level.title} · {level.points} XP</span><h2>{challenge.title}</h2><p>{challenge.description}</p><div className="python-challenge-task"><strong>المطلوب</strong><p>{challenge.task}</p></div><PythonLab key={challenge.id} lesson={challenge} profileId={profileId} onDone={setLabPassed} exampleEnabled={false} inputsEnabled={false}/><div className="python-challenge-hints"><strong>تلميحات تدريجية</strong><p>حاول تشغيل قالب التحدي أولًا، ثم اكشف تلميحًا عند الحاجة.</p>{challenge.hints.slice(0, hintCount).map((hint, index) => <p key={index}><span>{index + 1}</span>{hint}</p>)}{hintCount < challenge.hints.length && <button onClick={() => setHintCount(value => value + 1)}>اكشف تلميحًا {hintCount + 1} من {challenge.hints.length}</button>}</div>{completed[`python-challenge:${challenge.id}`] && <details className="python-example"><summary>نموذج للمراجعة بعد الإنجاز</summary><pre dir="ltr"><code>{challenge.solution}</code></pre></details>}<div className="python-challenge-award">{!profile && <p>اختر اسمك من الرئيسية إذا أردت حفظ إنجازك ونقاطك.</p>}{profile && !labPassed && !completed[`python-challenge:${challenge.id}`] && <p>اجتز جميع حالات الفحص في المختبر قبل حفظ الإنجاز.</p>}<button disabled={!profile || !labPassed || !!completed[`python-challenge:${challenge.id}`]} onClick={() => award(`python-challenge:${challenge.id}`, level.points)}>{completed[`python-challenge:${challenge.id}`] ? 'أنجزت التحدي ✓' : `حفظ الإنجاز · +${level.points} XP`}</button></div></div></>}
+  </section>;
+}
