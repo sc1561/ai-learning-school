@@ -1,0 +1,34 @@
+const LIMIT = 2 * 1024 * 1024;
+const plain = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+
+export function makeProgressBackup(id, profile) {
+  if (!id || !profile) throw new Error('اختر الطالب أولًا');
+  return JSON.stringify({ format: 'alzahrawi-progress', version: 1, exportedAt: new Date().toISOString(), id,
+    profile: { name: profile.name, section: profile.section || '', xp: profile.xp || 0,
+      completed: profile.completed || {}, attempts: profile.attempts || [],
+      pilot: profile.pilot || null, exam: profile.exam?.status === 'finished' ? profile.exam : null } }, null, 2);
+}
+
+export function readProgressBackup(text, expectedId, expectedProfile) {
+  if (!expectedId || !expectedProfile) throw new Error('اختر الطالب قبل استيراد تقدمه');
+  if (typeof text !== 'string' || text.length > LIMIT) throw new Error('ملف النسخة كبير جدًا');
+  let data;
+  try { data = JSON.parse(text); } catch { throw new Error('ملف JSON غير صالح'); }
+  if (!plain(data) || data.format !== 'alzahrawi-progress' || data.version !== 1 || data.id !== expectedId || !plain(data.profile)) {
+    throw new Error('النسخة لا تخص الطالب المحدد أو تنسيقها غير مدعوم');
+  }
+  const p = data.profile;
+  if (p.name !== expectedProfile.name || (p.section || '') !== (expectedProfile.section || '')) {
+    throw new Error('الاسم أو الشعبة في النسخة لا يطابقان الطالب الحالي');
+  }
+  if (!Number.isSafeInteger(p.xp) || p.xp < 0 || p.xp > 1000000 || !plain(p.completed) ||
+      Object.keys(p.completed).length > 2000 || Object.entries(p.completed).some(([key, value]) => key.length > 100 || value !== true) ||
+      !Array.isArray(p.attempts) || p.attempts.length > 500 || p.attempts.some(x => !plain(x)) ||
+      (p.pilot !== null && p.pilot !== undefined && !plain(p.pilot)) ||
+      (p.exam !== null && p.exam !== undefined && !plain(p.exam))) {
+    throw new Error('بيانات التقدم في الملف غير صالحة');
+  }
+  return { name: expectedProfile.name, section: expectedProfile.section || '', xp: p.xp,
+    completed: Object.fromEntries(Object.entries(p.completed)), attempts: p.attempts,
+    pilot: p.pilot || undefined, exam: p.exam?.status === 'finished' ? p.exam : null };
+}
