@@ -61,10 +61,11 @@ export function evaluateSimulation(run, finished = Date.now()) {
 export function simulationRecommendation(report, completed = {}) {
   if (!report) return null;
   const ordered = report.questionIds.map(id => simulationBank.find(item => item.id === id)).filter(Boolean);
-  const weakSkill = simulationSkills.find(skill => {
-    const result = report.breakdown?.[skill.id];
-    return result && result.correct < result.total;
-  });
+  const weakSkill = [...simulationSkills].filter(skill => report.breakdown?.[skill.id]?.total)
+    .sort((a, b) => {
+      const first = report.breakdown[a.id], second = report.breakdown[b.id];
+      return first.correct / first.total - second.correct / second.total;
+    }).find(skill => report.breakdown[skill.id].correct < report.breakdown[skill.id].total);
   const missed = ordered.filter(item => item.skill === weakSkill?.id && report.answers?.[item.id] !== item.correct);
   const target = missed.find(item => !completed[`academy:${item.lessonId}`]) || missed[0];
   if (target) return { areaId: target.areaId, trackId: target.trackId, lessonId: target.lessonId, title: target.skill.startsWith('python') ? 'راجع مهارة بايثون' : 'راجع مهارة التقاط العلم' };
